@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppEncryptDecrypt", "ConsoleAppEncryptDecrypt\ConsoleAppEncryptDecrypt.csproj", "{575CAB89-1FF1-46F9-8A05-3BAAB488CFA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibraryEncryptDecrypt", "ClassLibraryEncryptDecrypt\ClassLibraryEncryptDecrypt.csproj", "{5660AE63-8226-4CDD-9F78-8E59857F8AAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestEncryptDecrypt", "UnitTestEncryptDecrypt\UnitTestEncryptDecrypt.csproj", "{89C7CC0C-5F2D-4CE1-A1B4-FFDFB2AEC275}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{7C03AE68-A893-4BC0-BB02-88B2DC785CEA}"
+	ProjectSection(SolutionItems) = preProject
+		files\testing.cs = files\testing.cs
+		files\testing.txt = files\testing.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{575CAB89-1FF1-46F9-8A05-3BAAB488CFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575CAB89-1FF1-46F9-8A05-3BAAB488CFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575CAB89-1FF1-46F9-8A05-3BAAB488CFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575CAB89-1FF1-46F9-8A05-3BAAB488CFA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5660AE63-8226-4CDD-9F78-8E59857F8AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5660AE63-8226-4CDD-9F78-8E59857F8AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5660AE63-8226-4CDD-9F78-8E59857F8AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5660AE63-8226-4CDD-9F78-8E59857F8AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C7CC0C-5F2D-4CE1-A1B4-FFDFB2AEC275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C7CC0C-5F2D-4CE1-A1B4-FFDFB2AEC275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C7CC0C-5F2D-4CE1-A1B4-FFDFB2AEC275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C7CC0C-5F2D-4CE1-A1B4-FFDFB2AEC275}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E15AA327-3FA4-4285-98F7-6211466C5551}
+	EndGlobalSection
+EndGlobal

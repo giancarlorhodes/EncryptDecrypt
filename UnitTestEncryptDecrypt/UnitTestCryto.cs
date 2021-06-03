@@ -40,17 +40,18 @@ namespace UnitTestEncryptDecrypt
         }
 
         [TestMethod]
-        public void encrypt_and_decrpt_some_text_and_they_should_be_equal()
+        public void encrypt_and_decrpt_some_text_and_they_should_be_equal_length()
         {
 
             // arrange
             string expected = "some random text";
             string actual = "";
+            string _p = "password";
 
 
             // act
-            var e = Crypto.EncryptStringAES(expected, "password");
-            var d = Crypto.DecryptStringAES(e, "password");
+            var e = Crypto.EncryptStringAES(expected, _p);
+            var d = Crypto.DecryptStringAES(e, _p);
             actual = d;
 
             // assert

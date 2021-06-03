@@ -78,15 +78,15 @@ namespace UnitTestEncryptDecrypt
         }
 
 
-            [TestMethod]
-        public void not_null_private_key_and_public_vector()
-        {
-            Console.WriteLine("Init Vector: " + _worker.PublicVector);
-            Console.WriteLine("Private Key: " + _worker.PrivateKey);
+        //    [TestMethod]
+        //public void not_null_private_key_and_public_vector()
+        //{
+        //    Console.WriteLine("Init Vector: " + _worker.PublicVector);
+        //    Console.WriteLine("Private Key: " + _worker.PrivateKey);
 
-            Assert.IsTrue(_worker.PublicVector != null && _worker.PrivateKey != null);
+        //    Assert.IsTrue(_worker.PublicVector != null && _worker.PrivateKey != null);
 
-        }
+        //}
 
 
         

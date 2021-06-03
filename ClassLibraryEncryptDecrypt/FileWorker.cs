@@ -22,9 +22,9 @@ namespace ClassLibraryEncryptDecrypt
         //FileStream DestinationStream { get; set; }
         //FileStream SourceStream { get; set; }
       
-        AesCryptoServiceProvider Provider { get; set; }
+        //AesCryptoServiceProvider Provider { get; set; }
 
-        ICryptoTransform Transform { get; set; }
+        //ICryptoTransform Transform { get; set; }
         public string PrivateKey { get; set; }
         public string PublicVector { get; set; }
 
@@ -32,9 +32,9 @@ namespace ClassLibraryEncryptDecrypt
         // constructors
         public FileWorker()
         {
-            Provider = new AesCryptoServiceProvider();
-            Transform = Provider.CreateEncryptor();
-            ConvertKeyAndVector();
+            //Provider = new AesCryptoServiceProvider();
+            //Transform = Provider.CreateEncryptor();
+            //ConvertKeyAndVector();
         }
 
 
@@ -45,9 +45,9 @@ namespace ClassLibraryEncryptDecrypt
             this._destinationFileName = destinationFileName;
             this._keyFileName = keysFileName;
 
-            Provider = new AesCryptoServiceProvider();
-            Transform = Provider.CreateEncryptor();
-            ConvertKeyAndVector();
+            //Provider = new AesCryptoServiceProvider();
+            //Transform = Provider.CreateEncryptor();
+            //ConvertKeyAndVector();
         }
 
 
@@ -241,51 +241,51 @@ namespace ClassLibraryEncryptDecrypt
         //}
 
 
-        private void ConvertKeyAndVector()
-        {
-            this.PrivateKey = Convert.ToBase64String(Provider.Key);
-            this.PublicVector = Convert.ToBase64String(Provider.IV);
-        }
+        //private void ConvertKeyAndVector()
+        //{
+        //    this.PrivateKey = Convert.ToBase64String(Provider.Key);
+        //    this.PublicVector = Convert.ToBase64String(Provider.IV);
+        //}
 
-        private bool IsPathExisting(string path)
-        {
+        //private bool IsPathExisting(string path)
+        //{
 
-            // https://stackoverflow.com/questions/1395205/better-way-to-check-if-a-path-is-a-file-or-a-directory
-            FileAttributes attr = File.GetAttributes(path);
+        //    // https://stackoverflow.com/questions/1395205/better-way-to-check-if-a-path-is-a-file-or-a-directory
+        //    FileAttributes attr = File.GetAttributes(path);
 
-            //detect whether its a directory or file
-            if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
-                return true;
-            else
-                return false;
+        //    //detect whether its a directory or file
+        //    if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+        //        return true;
+        //    else
+        //        return false;
 
-        }
+        //}
 
-        private bool IsFileExisting(string file)
-        {
-            try
-            {
+        //private bool IsFileExisting(string file)
+        //{
+        //    try
+        //    {
 
-                // get the file attributes for file or directory
-                FileAttributes attr = File.GetAttributes(file);
+        //        // get the file attributes for file or directory
+        //        FileAttributes attr = File.GetAttributes(file);
 
-                //detect whether its a directory or file
-                if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
-                    return false;
-                else
-                    return true;
-            }
-            catch(FileNotFoundException) 
-            {
+        //        //detect whether its a directory or file
+        //        if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+        //            return false;
+        //        else
+        //            return true;
+        //    }
+        //    catch(FileNotFoundException) 
+        //    {
 
-                return false;
+        //        return false;
             
-            }
-            catch (Exception)
-            {
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return false;
-            }         
-        }
+        //        return false;
+        //    }         
+        //}
     }
 }

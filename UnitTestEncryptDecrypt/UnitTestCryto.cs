@@ -52,7 +52,7 @@ namespace UnitTestEncryptDecrypt
 
             // act
             var e = c.EncryptStringAES(expected, _p);
-            var d = Crypto.DecryptStringAES(e, _p);
+            var d = c.DecryptStringAES(e, _p);
             actual = d;
 
             // assert

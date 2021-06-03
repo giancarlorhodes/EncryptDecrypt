@@ -69,7 +69,7 @@ namespace UnitTestEncryptDecrypt
             _worker.DeleteFile(_encryptedCSharpFileName);
             _worker.StringToFile(e, _encryptedCSharpFileName);
 
-            string d = Crypto.DecryptStringAES(e, null);
+            string d = c.DecryptStringAES(e, null);
             _worker.DeleteFile(_decryptedCSharpFileName);
             _worker.StringToFile(d, _decryptedCSharpFileName);
 

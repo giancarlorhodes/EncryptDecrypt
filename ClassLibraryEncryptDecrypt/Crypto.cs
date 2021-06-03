@@ -13,27 +13,28 @@ namespace ClassLibraryEncryptDecrypt
         //password based encryption, it's probably safe enough as long as
         //it is truly uncommon. Also too much work to alter this answer otherwise.
         //private static byte[] _salt = __To_Do__("Add a app specific salt here");
-        private static byte[] _salt; //MapGuidToByteArray();
-        private static string _password;
-        public byte[] Salt { get => _salt;}
-        public string Password { get => _password; }
-        public static string PrivateKey { get; private set; }
-        public static string PublicVector { get; private set; }
+        
 
+        public static byte[] Salt { get; private set; }
+        public static string Password { get; private set; }
+        public string PrivateKey { get; private set; }
+        public string PublicVector { get; private set; }
+
+        
 
         // constructors
         public Crypto() 
         {
-
-            _salt = MapGuidToByteArray();
-            _password = "password";
+            // salt is generated and returned here
+            Salt = MapGuidToByteArray(null);
+            Password = "password";
         
         }
 
-        public Crypto(string password)
+        public Crypto(string password, string guid = "3b8e40db-0bcc-486b-bac0-87610d3a6129")
         {
-            _salt = MapGuidToByteArray();
-            _password = password;
+            Salt = MapGuidToByteArray(guid);
+            Password = password;
 
         }
        
@@ -44,7 +45,7 @@ namespace ClassLibraryEncryptDecrypt
         /// </summary>
         /// <param name="plainText">The text to encrypt.</param>
         /// <param name="sharedSecret">A password used to generate a key for encryption.</param>
-        public static string EncryptStringAES(string plainText, string sharedSecret)
+        public string EncryptStringAES(string plainText, string sharedSecret)
         {
             if (string.IsNullOrEmpty(plainText))
                 throw new ArgumentNullException("plainText");
@@ -52,7 +53,7 @@ namespace ClassLibraryEncryptDecrypt
             // three ways to set the sharedSecret
             // passed in as method paramater or stored in property thru the constructor
             if (string.IsNullOrEmpty(sharedSecret))
-                sharedSecret = _password;
+                sharedSecret = Password;
             //    throw new ArgumentNullException("sharedSecret");
 
             string outStr = null;                       // Encrypted string to return
@@ -62,15 +63,16 @@ namespace ClassLibraryEncryptDecrypt
             {
                 // generate the key from the shared secret and the salt
 
-                Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedSecret, _salt);
+                Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(sharedSecret, Salt);
 
                 // Create a RijndaelManaged object
                 aesAlg = new RijndaelManaged();
                 aesAlg.Key = key.GetBytes(aesAlg.KeySize / 8);
+                
 
                 // Create a encryptor to perform the stream transform.
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-                ConvertKeyAndVector(aesAlg.Key, aesAlg.IV); 
+                this.ConvertKeyAndVector(aesAlg.Key, aesAlg.IV); 
 
                 // Create the streams used for encryption.
                 using (MemoryStream msEncrypt = new MemoryStream())
@@ -113,7 +115,7 @@ namespace ClassLibraryEncryptDecrypt
             // three ways to set the sharedSecret
             // passed in as method paramater or stored in property thru the constructor
             if (string.IsNullOrEmpty(sharedSecret))
-                sharedSecret = _password;
+                sharedSecret = Password;
             //    throw new ArgumentNullException("sharedSecret");
 
             // Declare the RijndaelManaged object
@@ -127,7 +129,7 @@ namespace ClassLibraryEncryptDecrypt
             try
             {
                 // generate the key from the shared secret and the salt
-                Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(_password, _salt);
+                Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(Password, Salt);
 
                 // Create the streams used for decryption.                
                 byte[] bytes = Convert.FromBase64String(cipherText);
@@ -180,15 +182,20 @@ namespace ClassLibraryEncryptDecrypt
 
             return buffer;
         }
-
-        private static byte[] MapGuidToByteArray()
+        private static byte[] MapGuidToByteArray(string guid)
         {
-            Guid _g = Guid.NewGuid();
-            return _g.ToByteArray();
+            if (string.IsNullOrEmpty(guid))
+            {
+                Guid _g = Guid.NewGuid();
+                return _g.ToByteArray();
+            }
+            else 
+            {
+                byte[] bytes = Encoding.ASCII.GetBytes(guid);
+                return bytes;
+            }
         }
-
-
-        private static void ConvertKeyAndVector(byte[] key, byte[] vector)
+        private void ConvertKeyAndVector(byte[] key, byte[] vector)
         {
             PrivateKey = Convert.ToBase64String(key);
             PublicVector = Convert.ToBase64String(vector);

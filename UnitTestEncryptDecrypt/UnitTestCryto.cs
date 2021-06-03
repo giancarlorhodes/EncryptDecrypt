@@ -47,16 +47,46 @@ namespace UnitTestEncryptDecrypt
             string expected = "some random text";
             string actual = "";
             string _p = "password";
+            Crypto c = new Crypto(_p);
 
 
             // act
-            var e = Crypto.EncryptStringAES(expected, _p);
+            var e = c.EncryptStringAES(expected, _p);
             var d = Crypto.DecryptStringAES(e, _p);
             actual = d;
 
             // assert
             Assert.AreEqual(expected, actual);
 
+        }
+
+
+        [TestMethod]
+        public void same_salt_and_password_results_in_same_private_key_and_vector()
+        {
+
+            // arrange            
+            string salt = Guid.NewGuid().ToString();
+            string _p = "password";
+
+            // act
+            Crypto expected = new Crypto(_p, salt);
+            Crypto actual = new Crypto(_p, salt);
+
+            // assert
+            // this method is where key and vector get set
+            expected.EncryptStringAES("test", _p);
+            actual.EncryptStringAES("test", _p);
+
+            Console.WriteLine("Private Key expected: " + expected.PrivateKey 
+                + ", Private Key actual: " + actual.PrivateKey);
+            Assert.AreEqual(expected.PrivateKey, actual.PrivateKey);
+           
+            Console.WriteLine("Public Vector expected: " + expected.PublicVector 
+                + ", Public Vector actual: " + actual.PublicVector);
+            Assert.AreNotEqual(expected.PublicVector, actual.PublicVector);
+           
+          
         }
 
 

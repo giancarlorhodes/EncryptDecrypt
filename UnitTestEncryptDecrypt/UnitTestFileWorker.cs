@@ -65,7 +65,7 @@ namespace UnitTestEncryptDecrypt
             Crypto c = new Crypto("password");
 
             // act
-            string e = Crypto.EncryptStringAES(s, null);
+            string e = c.EncryptStringAES(s, null);
             _worker.DeleteFile(_encryptedCSharpFileName);
             _worker.StringToFile(e, _encryptedCSharpFileName);
 
